@@ -270,12 +270,6 @@ func findSubscriptions(ctx context.Context, endpointRepo datastore.EndpointRepos
 		if err != nil {
 			return nil, &EndpointError{Err: err, delay: defaultDelay}
 		}
-
-		subscriptions, err = matchSubscriptionsUsingFilter(ctx, event, subRepo, subscriptions)
-		if err != nil {
-			log.WithError(err).Error("error find a matching subscription for this source")
-			return subscriptions, &EndpointError{Err: errors.New("error find a matching subscription for this source"), delay: defaultDelay}
-		}
 	}
 
 	return subscriptions, nil
